@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 app.get('/get/@:name', async (req, res) => {
   const { name } = req.params
   const { theme = 'moebooru' } = req.query
-  let length = PLACES
+  // let length = PLACES
 
   // This helps with GitHub's image cache 
   res.set({
@@ -42,8 +42,11 @@ app.get('/get/@:name', async (req, res) => {
     length = 10
   }
 
+  // Auto adjust the length of the image
+  const count = data.num
+  const length = count.toString().split('');
   // Send the generated SVG as the result
-  const renderSvg = themify.getCountImage({ count: data.num, theme, length })
+  const renderSvg = themify.getCountImage({ count: count, theme, length })
   res.send(renderSvg)
 
   console.log(data, `theme: ${theme}`, `ref: ${req.get('Referrer') || null}`, `ua: ${req.get('User-Agent') || null}`)
