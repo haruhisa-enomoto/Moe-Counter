@@ -44,7 +44,7 @@ app.get('/get/@:name', async (req, res) => {
 
   // Auto adjust the length of the image
   const count = data.num
-  const length = count.toString().split('');
+  const length = count.toString().length;
   // Send the generated SVG as the result
   const renderSvg = themify.getCountImage({ count: count, theme, length })
   res.send(renderSvg)
